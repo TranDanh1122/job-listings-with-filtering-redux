@@ -30,14 +30,19 @@ const appReducer = createSlice({
             state.filter = state.filter.filter((el: string) => el != action.payload)
         },
         applyFilter(state: AppState) {
-            if (state.filter.length <= 0) state.filteredData = state.data
-            state.filteredData = state.data.filter(
-                job => state.filter.some(filter =>
-                    job.level === filter ||
-                    job.role === filter ||
-                    job.languages.includes(filter) ||
-                    job.tools.includes(filter)
-                ))
+
+            if (state.filter.length <= 0) {
+                state.filteredData = state.data
+            } else {
+                state.filteredData = state.data.filter(
+                    job => state.filter.some(filter =>
+                        job.level === filter ||
+                        job.role === filter ||
+                        job.languages.includes(filter) ||
+                        job.tools.includes(filter)
+                    ))
+            }
+
         }
     },
     extraReducers: (builder) => {
